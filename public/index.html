@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Biblioteca</title>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Biblioteca</h1>
+
+    <!-- Abas para alternar entre login e registro -->
+    <div class="abas">
+      <button class="aba ativa" onclick="mostrarAba('login')">Login</button>
+      <button class="aba" onclick="mostrarAba('registro')">Registrar</button>
+    </div>
+
+    <!-- Formulário de Login -->
+    <div id="form-login">
+      <h2>Entrar</h2>
+      <input type="email" id="login-email" placeholder="Email" />
+      <input type="password" id="login-senha" placeholder="Senha" />
+      <button onclick="fazerLogin()">Entrar</button>
+      <p id="msg-login" class="mensagem"></p>
+    </div>
+
+    <!-- Formulário de Registro -->
+    <div id="form-registro" class="escondido">
+      <h2>Criar conta</h2>
+      <input type="text" id="reg-nome" placeholder="Nome completo" />
+      <input type="email" id="reg-email" placeholder="Email" />
+      <input type="password" id="reg-senha" placeholder="Senha" />
+      <select id="reg-perfil">
+        <option value="">Selecione seu perfil</option>
+        <option value="leitor">Leitor</option>
+        <option value="bibliotecario">Bibliotecário</option>
+      </select>
+      <button onclick="fazerRegistro()">Criar conta</button>
+      <p id="msg-registro" class="mensagem"></p>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

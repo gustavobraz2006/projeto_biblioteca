@@ -1,0 +1,21 @@
+Abra o arquivo db.js e verifique se as credenciais estão corretas:
+
+host: localhost
+user: seu usuário do MySQL (normalmente root)
+password: sua senha do MySQL
+database: biblioteca
+port: 3306
+
+— Instalar as dependências
+Abra o terminal na pasta do projeto e execute:
+npm install express
+npm install mysql2
+
+— Iniciar o servidor
+No mesmo terminal execute:
+npm start
+Se aparecer a mensagem "Servidor rodando em http://localhost:3000" está tudo certo.
+
+— Acessar o sistema
+Abra o navegador e acesse:
+http://localhost:3000

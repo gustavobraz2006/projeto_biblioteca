@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Painel do Leitor</title>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>Painel do Leitor</h1>
+      <button onclick="sair()">Sair</button>
+    </div>
+
+    <!-- SEÇÃO: Catálogo de livros -->
+    <section>
+      <h2>Livros Disponíveis</h2>
+      <table id="tabela-livros">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Ano</th>
+            <th>Disponíveis</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody id="corpo-livros"></tbody>
+      </table>
+    </section>
+
+    <!-- MODAL: Solicitar empréstimo -->
+    <div id="modal-emprestimo" class="modal escondido">
+      <div class="modal-conteudo">
+        <h2>Solicitar Empréstimo</h2>
+        <p id="modal-livro-nome"></p>
+        <input type="hidden" id="modal-livro-id" />
+        <label>Data de devolução prevista:</label>
+        <input type="date" id="modal-data-devolucao" />
+        <div class="modal-botoes">
+          <button onclick="confirmarEmprestimo()">Confirmar</button>
+          <button onclick="fecharModal()">Cancelar</button>
+        </div>
+        <p id="msg-emprestimo" class="mensagem"></p>
+      </div>
+    </div>
+
+    <!-- SEÇÃO: Meus empréstimos -->
+    <section>
+      <h2>Meus Empréstimos</h2>
+      <table id="tabela-meus-emprestimos">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Livro</th>
+            <th>Empréstimo</th>
+            <th>Devolução Prevista</th>
+            <th>Status</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody id="corpo-meus-emprestimos"></tbody>
+      </table>
+    </section>
+
+  </div>
+
+  <script src="leitor.js"></script>
+</body>
+</html>

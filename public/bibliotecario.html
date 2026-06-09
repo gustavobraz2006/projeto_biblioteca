@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Painel do Bibliotecário</title>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>Painel do Bibliotecário</h1>
+      <button onclick="sair()">Sair</button>
+    </div>
+
+    <!-- SEÇÃO: Cadastrar novo livro -->
+    <section>
+      <h2>Cadastrar Novo Livro</h2>
+      <div class="form-linha">
+        <input type="text" id="livro-titulo" placeholder="Título" />
+        <input type="text" id="livro-autor" placeholder="Autor" />
+        <input type="number" id="livro-ano" placeholder="Ano (opcional)" />
+        <input type="number" id="livro-quantidade" placeholder="Quantidade" />
+        <button onclick="cadastrarLivro()">Cadastrar</button>
+      </div>
+      <p id="msg-livro" class="mensagem"></p>
+    </section>
+
+    <!-- SEÇÃO: Lista de livros -->
+    <section>
+      <h2>Livros Cadastrados</h2>
+      <table id="tabela-livros">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Ano</th>
+            <th>Quantidade</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="corpo-livros"></tbody>
+      </table>
+    </section>
+
+    <!-- SEÇÃO: Editar livro (aparece ao clicar em editar) -->
+    <section id="form-editar" class="escondido">
+      <h2>Editar Livro</h2>
+      <input type="hidden" id="editar-id" />
+      <div class="form-linha">
+        <input type="text" id="editar-titulo" placeholder="Título" />
+        <input type="text" id="editar-autor" placeholder="Autor" />
+        <input type="number" id="editar-ano" placeholder="Ano (opcional)" />
+        <input type="number" id="editar-quantidade" placeholder="Quantidade" />
+        <button onclick="salvarEdicao()">Salvar</button>
+        <button onclick="cancelarEdicao()">Cancelar</button>
+      </div>
+      <p id="msg-editar" class="mensagem"></p>
+    </section>
+
+    <!-- SEÇÃO: Empréstimos ativos -->
+    <section>
+      <h2>Empréstimos Ativos</h2>
+      <table id="tabela-emprestimos">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Leitor</th>
+            <th>Livro</th>
+            <th>Empréstimo</th>
+            <th>Devolução Prevista</th>
+            <th>Status</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody id="corpo-emprestimos"></tbody>
+      </table>
+    </section>
+
+  </div>
+
+  <script src="bibliotecario.js"></script>
+</body>
+</html>
