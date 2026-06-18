@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 
-// POST /api/usuarios/registro
+
 router.post('/registro', (req, res) => {
   const { nome, email, senha, perfil } = req.body;
 
-  // Validação simples: todos os campos são obrigatórios
+ 
   if (!nome || !email || !senha || !perfil) {
     return res.status(400).json({ erro: 'Todos os campos são obrigatórios.' });
   }
@@ -14,7 +14,7 @@ router.post('/registro', (req, res) => {
   const sql = 'INSERT INTO usuarios (nome, email, senha, perfil) VALUES (?, ?, ?, ?)';
   db.query(sql, [nome, email, senha, perfil], (err, result) => {
     if (err) {
-      // Erro de email duplicado
+     
       if (err.code === 'ER_DUP_ENTRY') {
         return res.status(409).json({ erro: 'Email já cadastrado.' });
       }
@@ -24,7 +24,7 @@ router.post('/registro', (req, res) => {
   });
 });
 
-// POST /api/usuarios/login
+
 router.post('/login', (req, res) => {
   const { email, senha } = req.body;
 
@@ -40,7 +40,6 @@ router.post('/login', (req, res) => {
       return res.status(401).json({ erro: 'Email ou senha inválidos.' });
     }
 
-    // Retorna os dados do usuário para o frontend guardar
     const usuario = results[0];
     res.json({ mensagem: 'Login realizado com sucesso!', usuario });
   });
