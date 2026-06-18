@@ -1,4 +1,4 @@
-// Alterna entre as abas de login e registro
+
 function mostrarAba(aba) {
   document.getElementById('form-login').classList.add('escondido');
   document.getElementById('form-registro').classList.add('escondido');
@@ -8,7 +8,7 @@ function mostrarAba(aba) {
   event.target.classList.add('ativa');
 }
 
-// Faz o registro do usuário
+
 async function fazerRegistro() {
   const nome = document.getElementById('reg-nome').value;
   const email = document.getElementById('reg-email').value;
@@ -73,10 +73,10 @@ async function fazerLogin() {
       return;
     }
 
-    // Salva os dados do usuário no localStorage
+    
     localStorage.setItem('usuario', JSON.stringify(dados.usuario));
 
-    // Redireciona conforme o perfil
+   
     if (dados.usuario.perfil === 'bibliotecario') {
       window.location.href = 'bibliotecario.html';
     } else {
