@@ -1,16 +1,16 @@
-// Pega o usuário logado do localStorage
+
 const usuario = JSON.parse(localStorage.getItem('usuario'));
 
-// Segurança: se não estiver logado ou não for leitor, volta para o login
+
 if (!usuario || usuario.perfil !== 'leitor') {
   window.location.href = 'index.html';
 }
 
-// Carrega os dados assim que a página abre
+
 carregarLivros();
 carregarMeusEmprestimos();
 
-// ─── CATÁLOGO DE LIVROS ────────────────────────────────
+
 
 async function carregarLivros() {
   const resposta = await fetch('/api/livros');
@@ -41,7 +41,7 @@ async function carregarLivros() {
   });
 }
 
-// ─── MODAL DE EMPRÉSTIMO ───────────────────────────────
+
 
 function abrirModal(livroId, livroTitulo) {
   document.getElementById('modal-livro-id').value = livroId;
@@ -66,7 +66,7 @@ async function confirmarEmprestimo() {
     return;
   }
 
-  // Garante que a data de devolução não seja no passado
+
   const hoje = new Date().toISOString().split('T')[0];
   if (data_devolucao_prevista <= hoje) {
     msg.textContent = 'A data de devolução deve ser futura.';
@@ -96,7 +96,7 @@ async function confirmarEmprestimo() {
   msg.textContent = 'Empréstimo solicitado com sucesso!';
   msg.className = 'mensagem sucesso';
 
-  // Aguarda 1 segundo e fecha o modal atualizando as tabelas
+
   setTimeout(() => {
     fecharModal();
     carregarLivros();
@@ -104,7 +104,7 @@ async function confirmarEmprestimo() {
   }, 1000);
 }
 
-// ─── MEUS EMPRÉSTIMOS ──────────────────────────────────
+
 
 async function carregarMeusEmprestimos() {
   const resposta = await fetch(`/api/emprestimos/meus/${usuario.id}`);
@@ -118,7 +118,7 @@ async function carregarMeusEmprestimos() {
   }
 
   emprestimos.forEach(emp => {
-    // Leitor só pode solicitar devolução se o status for 'ativo' ou 'atrasado'
+
     const podeDevolver = emp.status === 'ativo' || emp.status === 'atrasado';
 
     corpo.innerHTML += `
@@ -153,7 +153,7 @@ async function solicitarDevolucao(id) {
   carregarMeusEmprestimos();
 }
 
-// ─── SAIR ──────────────────────────────────────────────
+
 
 function sair() {
   localStorage.removeItem('usuario');
