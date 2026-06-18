@@ -1,16 +1,16 @@
-// Pega o usuário logado do localStorage
+
 const usuario = JSON.parse(localStorage.getItem('usuario'));
 
-// Segurança: se não estiver logado ou não for bibliotecário, volta para o login
+
 if (!usuario || usuario.perfil !== 'bibliotecario') {
   window.location.href = 'index.html';
 }
 
-// Carrega livros e empréstimos assim que a página abre
+
 carregarLivros();
 carregarEmprestimos();
 
-// ─── LIVROS ────────────────────────────────────────────
+
 
 async function carregarLivros() {
   const resposta = await fetch('/api/livros');
@@ -65,7 +65,6 @@ async function cadastrarLivro() {
   msg.textContent = 'Livro cadastrado com sucesso!';
   msg.className = 'mensagem sucesso';
 
-  // Limpa os campos e recarrega a tabela
   document.getElementById('livro-titulo').value = '';
   document.getElementById('livro-autor').value = '';
   document.getElementById('livro-ano').value = '';
@@ -80,7 +79,7 @@ function abrirEdicao(id, titulo, autor, ano, quantidade) {
   document.getElementById('editar-autor').value = autor;
   document.getElementById('editar-ano').value = ano || '';
   document.getElementById('editar-quantidade').value = quantidade;
-  // Rola a página até o formulário de edição
+
   document.getElementById('form-editar').scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -130,7 +129,7 @@ async function excluirLivro(id) {
   carregarLivros();
 }
 
-// ─── EMPRÉSTIMOS ───────────────────────────────────────
+
 
 async function carregarEmprestimos() {
   const resposta = await fetch('/api/emprestimos');
@@ -139,7 +138,7 @@ async function carregarEmprestimos() {
   corpo.innerHTML = '';
 
   emprestimos.forEach(emp => {
-    // Só mostra empréstimos que ainda não foram devolvidos
+
     if (emp.status === 'devolvido') return;
 
     corpo.innerHTML += `
@@ -170,10 +169,10 @@ async function aprovarDevolucao(id) {
   const dados = await resposta.json();
   alert(dados.mensagem || dados.erro);
   carregarEmprestimos();
-  carregarLivros(); // atualiza o estoque na tabela também
+  carregarLivros(); 
 }
 
-// ─── SAIR ──────────────────────────────────────────────
+
 
 function sair() {
   localStorage.removeItem('usuario');
