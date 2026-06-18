@@ -1,11 +1,11 @@
 
-function mostrarAba(aba) {
+function mostrarAba(event, aba) {
   document.getElementById('form-login').classList.add('escondido');
   document.getElementById('form-registro').classList.add('escondido');
   document.querySelectorAll('.aba').forEach(b => b.classList.remove('ativa'));
 
   document.getElementById(`form-${aba}`).classList.remove('escondido');
-  event.target.classList.add('ativa');
+  event.currentTarget.classList.add('ativa');
 }
 
 

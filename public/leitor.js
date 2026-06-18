@@ -118,8 +118,8 @@ async function carregarMeusEmprestimos() {
   }
 
   emprestimos.forEach(emp => {
-
     const podeDevolver = emp.status === 'ativo' || emp.status === 'atrasado';
+    const aguardando = emp.status === 'pedido_devolucao';
 
     corpo.innerHTML += `
       <tr>
@@ -131,7 +131,9 @@ async function carregarMeusEmprestimos() {
         <td>
           ${podeDevolver
             ? `<button onclick="solicitarDevolucao(${emp.id})">Solicitar Devolução</button>`
-            : '—'
+            : aguardando
+              ? 'Aguardando aprovação'
+              : '—'
           }
         </td>
       </tr>

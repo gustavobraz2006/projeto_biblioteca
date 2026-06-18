@@ -2,14 +2,12 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 
-
 router.get('/', (req, res) => {
   db.query('SELECT * FROM livros', (err, results) => {
     if (err) return res.status(500).json({ erro: 'Erro ao buscar livros.' });
     res.json(results);
   });
 });
-
 
 router.post('/', (req, res) => {
   const { titulo, autor, ano_publicacao, quantidade_disponivel, perfil } = req.body;
@@ -18,17 +16,17 @@ router.post('/', (req, res) => {
     return res.status(403).json({ erro: 'Apenas bibliotecários podem cadastrar livros.' });
   }
 
-  if (!titulo || !autor || !quantidade_disponivel) {
-    return res.status(400).json({ erro: 'Título, autor e quantidade são obrigatórios.' });
+  const quantidade = Number(quantidade_disponivel);
+  if (!titulo || !autor || quantidade_disponivel === undefined || quantidade_disponivel === null || Number.isNaN(quantidade) || quantidade < 0) {
+    return res.status(400).json({ erro: 'Título, autor e quantidade válidos são obrigatórios.' });
   }
 
   const sql = 'INSERT INTO livros (titulo, autor, ano_publicacao, quantidade_disponivel) VALUES (?, ?, ?, ?)';
-  db.query(sql, [titulo, autor, ano_publicacao || null, quantidade_disponivel], (err, result) => {
+  db.query(sql, [titulo, autor, ano_publicacao || null, quantidade], (err, result) => {
     if (err) return res.status(500).json({ erro: 'Erro ao cadastrar livro.' });
     res.status(201).json({ mensagem: 'Livro cadastrado com sucesso!' });
   });
 });
-
 
 router.put('/:id', (req, res) => {
   const { titulo, autor, ano_publicacao, quantidade_disponivel, perfil } = req.body;
@@ -38,14 +36,18 @@ router.put('/:id', (req, res) => {
     return res.status(403).json({ erro: 'Apenas bibliotecários podem editar livros.' });
   }
 
+  const quantidade = Number(quantidade_disponivel);
+  if (!titulo || !autor || quantidade_disponivel === undefined || quantidade_disponivel === null || Number.isNaN(quantidade) || quantidade < 0) {
+    return res.status(400).json({ erro: 'Título, autor e quantidade válidos são obrigatórios.' });
+  }
+
   const sql = 'UPDATE livros SET titulo = ?, autor = ?, ano_publicacao = ?, quantidade_disponivel = ? WHERE id = ?';
-  db.query(sql, [titulo, autor, ano_publicacao || null, quantidade_disponivel, id], (err, result) => {
+  db.query(sql, [titulo, autor, ano_publicacao || null, quantidade, id], (err, result) => {
     if (err) return res.status(500).json({ erro: 'Erro ao atualizar livro.' });
     if (result.affectedRows === 0) return res.status(404).json({ erro: 'Livro não encontrado.' });
     res.json({ mensagem: 'Livro atualizado com sucesso!' });
   });
 });
-
 
 router.delete('/:id', (req, res) => {
   const { perfil } = req.body;

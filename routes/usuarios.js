@@ -2,19 +2,22 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 
+const perfisValidos = ['bibliotecario', 'leitor'];
 
 router.post('/registro', (req, res) => {
   const { nome, email, senha, perfil } = req.body;
 
- 
   if (!nome || !email || !senha || !perfil) {
     return res.status(400).json({ erro: 'Todos os campos são obrigatórios.' });
+  }
+
+  if (!perfisValidos.includes(perfil)) {
+    return res.status(400).json({ erro: 'Perfil inválido. Use bibliotecario ou leitor.' });
   }
 
   const sql = 'INSERT INTO usuarios (nome, email, senha, perfil) VALUES (?, ?, ?, ?)';
   db.query(sql, [nome, email, senha, perfil], (err, result) => {
     if (err) {
-     
       if (err.code === 'ER_DUP_ENTRY') {
         return res.status(409).json({ erro: 'Email já cadastrado.' });
       }
@@ -23,7 +26,6 @@ router.post('/registro', (req, res) => {
     res.status(201).json({ mensagem: 'Usuário registrado com sucesso!' });
   });
 });
-
 
 router.post('/login', (req, res) => {
   const { email, senha } = req.body;

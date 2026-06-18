@@ -1,0 +1,51 @@
+/* Minimal clean styling */
+:root{
+	--bg: #f8f9fa;
+	--card: #ffffff;
+	--accent: #111111; /* keep monochrome */
+	--muted: #6b6b6b;
+	--success: #111111;
+}
+*{box-sizing:border-box}
+body{
+	margin:0; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+	background:var(--bg); color:#111827;
+}
+.container{
+	max-width:1000px; margin:28px auto; background:var(--card); padding:20px; border-radius:10px; box-shadow:0 6px 18px rgba(15,23,42,0.06);
+}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+h1{font-size:20px;margin:0}
+input, select, button{font-size:14px;padding:8px 10px;border-radius:6px;border:1px solid #e6e9ee}
+button{background:transparent;color:var(--accent);border:1px solid var(--accent);cursor:pointer}
+button:hover{background:var(--accent);color:#fff}
+button[disabled]{opacity:.6;cursor:not-allowed}
+.form-linha{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.mensagem{margin-top:8px}
+.mensagem.erro{color:#b91c1c}
+.mensagem.sucesso{color:var(--success)}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{padding:8px;border-bottom:1px solid #eef2f7;text-align:left}
+th{background:#fafafa;color:var(--muted);font-weight:600}
+tr:hover td{background:#fbfdff}
+.status-ativo{color:#0ea5e9}
+.status-atrasado{color:#f59e0b}
+.status-devolvido{color:#10b981}
+.modal{position:fixed;left:0;top:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(2,6,23,0.5)}
+.modal-conteudo{background:var(--card);padding:16px;border-radius:8px;max-width:480px;width:90%}
+.escondido{display:none}
+
+/* small responsive */
+@media (max-width:720px){.form-linha{flex-direction:column}}
+
+/* Responsive table wrapper: allows horizontal scroll on small screens */
+.table-responsive{width:100%;overflow-x:auto}
+.table-responsive table{min-width:700px}
+
+/* Slightly smaller font on mobile for compactness */
+@media (max-width:480px){
+	body{font-size:14px}
+	th,td{padding:10px 6px}
+	h1{font-size:18px}
+}
+
