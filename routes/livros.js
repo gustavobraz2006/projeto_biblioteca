@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 
-// GET /api/livros — lista todos os livros
+
 router.get('/', (req, res) => {
   db.query('SELECT * FROM livros', (err, results) => {
     if (err) return res.status(500).json({ erro: 'Erro ao buscar livros.' });
@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
   });
 });
 
-// POST /api/livros — cadastra novo livro (só bibliotecário)
+
 router.post('/', (req, res) => {
   const { titulo, autor, ano_publicacao, quantidade_disponivel, perfil } = req.body;
 
@@ -29,7 +29,7 @@ router.post('/', (req, res) => {
   });
 });
 
-// PUT /api/livros/:id — edita um livro (só bibliotecário)
+
 router.put('/:id', (req, res) => {
   const { titulo, autor, ano_publicacao, quantidade_disponivel, perfil } = req.body;
   const { id } = req.params;
@@ -46,7 +46,7 @@ router.put('/:id', (req, res) => {
   });
 });
 
-// DELETE /api/livros/:id — remove um livro (só bibliotecário)
+
 router.delete('/:id', (req, res) => {
   const { perfil } = req.body;
   const { id } = req.params;
